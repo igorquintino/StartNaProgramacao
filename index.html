@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kit Start na Programação</title>
+  <meta name="description" content="Kit prático para conquistar seu primeiro emprego em programação: currículo, README, LinkedIn e entrevistas, tudo pronto para aplicar." />
+  <meta property="og:title" content="Kit Start na Programação" />
+  <meta property="og:description" content="Conquiste seu primeiro emprego em programação com modelos e checklists práticos." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#150a2d" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend+Giga:wght@100..900&family=Rubik+Glitch&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0b0f;
+      --text:#ffffff;
+      --muted:#d9d9e3;
+      --primary-1:#3F2B96; /* roxo */
+      --primary-2:#A86CF3; /* lilás */
+      --accent:#E5A1F8;    /* rosa */
+      --card:#111118;
+      --border:rgba(255,255,255,.08);
+      --shadow:0 8px 30px rgba(0,0,0,.35);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Poppins, Outfit, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color:var(--text);
+      background: radial-gradient(1200px 800px at 85% -10%, rgba(168,108,243,.18), transparent 60%),
+                  radial-gradient(900px 600px at -10% 20%, rgba(63,43,150,.25), transparent 55%),
+                  var(--bg);
+      line-height:1.65;
+      text-align:center; /* CENTRALIZAÇÃO GLOBAL DE TEXTOS */
+    }
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1120px, 92vw); margin-inline:auto}
+    header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(8px); background:rgba(11,11,15,.55); border-bottom:1px solid var(--border)}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 0; flex-wrap:wrap; row-gap:10px}
+    .brand{display:flex; gap:10px; align-items:center; font-weight:800; letter-spacing:.4px}
+    .brand-badge{width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--primary-2)); box-shadow:0 0 0 6px rgba(229,161,248,.18)}
+    .menu{display:flex; gap:22px; font-weight:600; font-size:.95rem; color:var(--muted); margin:0 auto}
+    .btn{display:inline-flex; align-items:center; justify-content:center; gap:10px; border:none; cursor:pointer; font-weight:800; letter-spacing:.2px; border-radius:999px; padding:14px 22px; transition:transform .15s ease, box-shadow .2s ease; box-shadow:0 8px 20px rgba(168,108,243,.25)}
+    .btn:hover{transform:translateY(-1px); box-shadow:0 12px 26px rgba(168,108,243,.35)}
+    .btn:active{transform:translateY(0)}
+    .btn-primary{background:linear-gradient(90deg,var(--primary-2), var(--accent)); color:#140a26}
+    .btn-outline{background:transparent; color:var(--muted); border:1px solid var(--border)}
+
+    /* HERO */
+    .hero{padding:96px 0 72px; position:relative}
+    .hero-grid{display:grid; grid-template-columns:1fr; gap:26px; align-items:center; justify-items:center}
+    .kicker{display:inline-block;font-weight:900;letter-spacing:.08em;text-transform:uppercase;font-size:clamp(1rem,2.8vw,1.2rem);color:var(--accent)}
+    .title{font-size:clamp(1.8rem,5.2vw,3.2rem);line-height:1.15;font-weight:900;margin:.35rem 0 1rem;padding:0 8px}
+    .subtitle{color:var(--muted);font-size:clamp(.98rem,2.4vw,1.1rem);max-width:68ch;margin:0 auto;padding:0 10px}
+    .hero-ctas{display:flex; gap:14px; margin-top:8px; flex-wrap:wrap; justify-content:center}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+      border:1px solid var(--border); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow); max-width:560px; margin:0 auto
+    }
+    .badge{display:inline-flex; align-items:center; gap:8px; font-size:.9rem; color:var(--muted); justify-content:center; padding:0 10px}
+
+    /* Sections */
+    section{padding:72px 0}
+    .section-title{font-size:clamp(1.6rem, 3.8vw, 2.6rem); line-height:1.15; font-weight:900; margin:0 0 14px; padding:0 10px}
+    .section-sub{color:var(--muted); margin:0 0 28px; padding:0 10px}
+    .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+    .grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:24px; align-items:start}
+
+    .feature{position:relative; padding:22px; border-radius:var(--radius); border:1px solid var(--border); background:linear-gradient(180deg, rgba(20,10,38,.8), rgba(11,11,15,.6)); box-shadow:var(--shadow)}
+    .feature h3{margin:6px 0 10px; font-size:1.1rem}
+    .icon{width:20px;height:20px;aspect-ratio:1/1;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--primary-2), var(--accent));color:#140a26;margin:0;font-size:12px;line-height:1;padding:0}
+
+    .cta-band{padding:30px;border:1px solid var(--border);border-radius:calc(var(--radius) + 6px);display:flex;flex-direction:column;gap:12px;justify-content:center;align-items:center;background:linear-gradient(90deg, rgba(63,43,150,.22), rgba(229,161,248,.10))}
+
+    /* Price */
+    .price-card{display:grid; justify-items:center; gap:16px; padding:28px; border-radius:var(--radius); border:1px solid var(--border); background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); box-shadow:var(--shadow)}
+    .price{font-size:clamp(2.1rem, 4.8vw, 2.8rem); font-weight:900}
+    .guarantee{font-size:1rem; color:var(--muted)}
+
+    /* FAQ */
+    details{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid var(--border); border-radius:14px; padding:16px 18px; margin-bottom:12px; text-align:left; max-width:860px; margin-inline:auto}
+    summary{cursor:pointer; font-weight:800}
+    details[open]{box-shadow:0 12px 40px rgba(0,0,0,.28)}
+
+    /* Footer */
+    footer{padding:48px 0; border-top:1px solid var(--border); color:var(--muted); font-size:.9rem}
+
+    /* Responsive tweaks */
+    @media (max-width: 1024px){
+      .menu{gap:16px}
+      .grid-3{grid-template-columns:1fr 1fr}
+      .grid-2{grid-template-columns:1fr}
+      .hero-ctas .btn{min-width:260px}
+    }
+    @media (max-width: 720px){
+      .menu{display:none}
+      .nav{justify-content:space-between; padding:10px 0}
+      header .btn{width:auto; max-width:none; padding:8px 12px; font-size:.85rem; border-radius:12px; box-shadow:none}
+      .brand{width:auto; justify-content:flex-start}
+      .cta-band{flex-direction:column}
+      .cta-band .btn{width:100%; max-width:340px}
+      .grid-3{grid-template-columns:1fr}
+      .hero{padding:64px 0 44px}
+      .badge{font-size:.85rem}
+      footer{font-size:.8rem}
+    }
+      .menu{display:none}
+      .cta-band{flex-direction:column}
+      .cta-band .btn{width:100%; max-width:340px}
+      .grid-3{grid-template-columns:1fr}
+      .brand{width:100%; justify-content:center}
+      .nav{justify-content:center}
+      .hero{padding:64px 0 44px}
+      .badge{font-size:.85rem}
+    }
+      .menu{display:none}
+      .cta-band{flex-direction:column}
+      .cta-band .btn{width:100%; max-width:340px}
+      .grid-3{grid-template-columns:1fr}
+      .brand{width:100%; justify-content:center}
+      .nav{justify-content:center}
+      .hero{padding:72px 0 56px}
+      .badge{font-size:.88rem}
+    }
+
+    /* Extra Mobile Tweaks */
+    @media (max-width: 480px){
+      body{line-height:1.55}
+      .hero{padding:52px 0 36px}
+      section{padding:56px 0}
+      .title{font-size:1.9rem; line-height:1.2}
+      .kicker{font-size:1rem; letter-spacing:.06em}
+      .subtitle{font-size:1rem}
+      .section-title{font-size:1.45rem}
+      .btn{width:100%; max-width:320px; padding:14px 18px; font-size:1rem}
+      .price{font-size:2.1rem}
+      details, summary{font-size:1rem}
+      ol, ol li{ text-align:left !important }
+      .icon{width:18px;height:18px;font-size:11px}
+      .cta-band{gap:8px}
+      footer{font-size:.75rem}
+    }
+      .hero{padding:52px 0 36px}
+      section{padding:56px 0}
+      .title{font-size:1.9rem; line-height:1.2}
+      .kicker{font-size:1rem; letter-spacing:.06em}
+      .subtitle{font-size:1rem}
+      .section-title{font-size:1.45rem}
+      .btn{width:100%; max-width:320px; padding:14px 18px; font-size:1rem}
+      .price{font-size:2.1rem}
+      details, summary{font-size:1rem}
+      ol{font-size:1rem}
+      .cta-band{gap:8px}
+    }
+
+    /* Motion */
+    @media (prefers-reduced-motion: no-preference){
+      .fade-up{opacity:0; transform:translateY(10px); animation:rise .7s ease .05s forwards}
+      @keyframes rise{to{opacity:1; transform:none}}
+    }
+    /* Garantir alinhamento à esquerda nos passos */
+    section ol{ text-align:left }
+    section ol li{ text-align:left }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand" aria-label="Quintino Coders">
+        <span class="brand-badge" aria-hidden="true"></span>
+        QUINTINO CODERS
+      </div>
+      <nav class="menu" aria-label="Menu principal">
+        <a href="#beneficios">O que você recebe</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#preco">Investimento</a>
+        <a href="#faq">Dúvidas</a>
+      </nav>
+      <a class="btn btn-primary" href="#checkout" aria-label="Ir para o checkout">Quero meu kit</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+          <span class="kicker">Start na Programação</span>
+          <h1 class="title">Dê o primeiro passo real para conquistar seu primeiro emprego em programação.</h1>
+          <p class="subtitle">Um kit prático com currículo, README de GitHub, checklist de LinkedIn e guia de entrevistas. Feito para aplicar em minutos, não em semanas.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="#checkout">Quero meu kit agora</a>
+          </div>
+          <div class="badge" style="margin-top:16px">
+            <span class="icon" aria-hidden="true">✓</span>
+            Acesso imediato • Arquivos editáveis (PDF, DOCX, MD, Canva)
+          </div>
+          <aside class="card fade-up" style="margin-top:22px">
+            <strong>Feito para iniciantes.</strong>
+            <p style="margin:.4rem 0 0; color:var(--muted)">Sem experiência? Sem problema. O foco é te apresentar como um profissional pronto.</p>
+          </aside>
+      </div>
+    </section>
+
+    <!-- BENEFÍCIOS -->
+    <section id="beneficios">
+      <div class="container">
+        <h2 class="section-title">Tudo o que você recebe</h2>
+        <p class="section-sub">Ferramentas essenciais, prontas para você personalizar e usar hoje.</p>
+        <div class="grid-3">
+          <div class="feature">
+            <div class="icon" aria-hidden="true">📄</div>
+            <h3>Currículo Profissional</h3>
+            <p style="color:var(--muted)">Modelo editável e clean, pensado para destacar habilidades, projetos e objetivos — mesmo sem experiência formal.</p>
+          </div>
+          <div class="feature">
+            <div class="icon" aria-hidden="true">🗂️</div>
+            <h3>README de GitHub</h3>
+            <p style="color:var(--muted)">Template pronto em Markdown para transformar seu perfil em uma vitrine organizada e atrativa.</p>
+          </div>
+          <div class="feature">
+            <div class="icon" aria-hidden="true">💼</div>
+            <h3>Checklist LinkedIn</h3>
+            <p style="color:var(--muted)">Passo a passo para um perfil encontrável e convincente para recrutadores.</p>
+          </div>
+          <div class="feature">
+            <div class="icon" aria-hidden="true">🎯</div>
+            <h3>Mini Guia de Entrevistas</h3>
+            <p style="color:var(--muted)">10 perguntas básicas com respostas objetivas e dicas para comunicar com clareza.</p>
+          </div>
+          <div class="feature">
+            <div class="icon" aria-hidden="true">🧩</div>
+            <h3>Projetos para Portfólio</h3>
+            <p style="color:var(--muted)">Ideias simples e eficazes para demonstrar habilidades técnicas com links de referência.</p>
+          </div>
+          <div class="feature">
+            <div class="icon" aria-hidden="true">⚡</div>
+            <h3>Aplicação Rápida</h3>
+            <p style="color:var(--muted)">Baixe, personalize e publique. Sem perda de tempo e sem adivinhação.</p>
+          </div>
+        </div>
+
+        <div class="cta-band" style="margin-top:26px">
+          <div>
+            <strong>Pronto para aplicar ainda hoje?</strong>
+            <p style="margin:.25rem 0 0; color:var(--muted)">Acelere seu começo com materiais que recrutadores realmente olham.</p>
+          </div>
+          <a class="btn btn-primary" href="#checkout">Garantir acesso</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMO FUNCIONA / PREÇO -->
+    <section id="como-funciona">
+      <div class="container grid-2" style="justify-items:center">
+        <div>
+          <h2 class="section-title">Como funciona</h2>
+          <ol style="padding-left:18px; color:var(--muted); text-align:left; max-width:620px; margin:0 auto">
+            <li style="margin-bottom:10px"><strong>Baixe os arquivos</strong> na sua área de membros.</li>
+            <li style="margin-bottom:10px"><strong>Personalize</strong> com seus dados, projetos e links.</li>
+            <li><strong>Publique e envie</strong> junto com suas candidaturas e networking.</li>
+          </ol>
+          <p class="section-sub">Simples de começar. Poderoso para te apresentar como profissional.</p>
+        </div>
+        <div class="price-card" id="preco">
+          <div>
+            <div class="badge"><span class="icon">★</span> Melhor custo-benefício</div>
+          </div>
+          <h3 style="margin:0">Investimento</h3>
+          <div class="price">R$ 47</div>
+          <p class="guarantee">Acesso imediato • Atualizações incluídas • Compra segura</p>
+          <a class="btn btn-primary" href="#checkout">Quero meu kit agora</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- AUTORIDADE / PROVA SOCIAL -->
+    <section>
+      <div class="container">
+        <h2 class="section-title">Feito por quem vive isso todos os dias</h2>
+        <p class="section-sub">Mais de <strong>2.000 programadores iniciantes</strong> fazem parte da comunidade <strong>Quintino Coders</strong>, aprendendo, evoluindo e conquistando oportunidades.</p>
+        <div class="grid-3">
+          <div class="card"><strong>Foco no essencial</strong><p style="color:var(--muted)">Nada de teoria infinita. Apenas o necessário para destravar entrevistas.</p></div>
+          <div class="card"><strong>Design profissional</strong><p style="color:var(--muted)">Arquivos pensados para leitura rápida por recrutadores.</p></div>
+          <div class="card"><strong>Pronto para usar</strong><p style="color:var(--muted)">Você aplica hoje e já melhora sua apresentação.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONSULTORIA -->
+    <section id="consultoria">
+      <div class="container">
+        <h2 class="section-title">Quer ir mais rápido?</h2>
+        <p class="section-sub">Além do kit, você pode agendar a <strong>Consultoria Exclusiva</strong> para revisão de currículo, GitHub e LinkedIn, preparo para entrevistas e um plano de ação individual.</p>
+        <p class="section-sub">Assim como o kit, é um investimento na sua carreira. Quanto melhor o investimento, mais rápidos os resultados.</p>
+        <a class="btn btn-outline" href="#contato">Agendar consultoria</a>
+        <div class="card" style="max-width:560px; margin:18px auto 0"><strong>Atenção</strong><p style="color:var(--muted)">Vagas limitadas para garantir acompanhamento pessoal de qualidade.</p></div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="container">
+        <h2 class="section-title">Dúvidas frequentes</h2>
+        <details>
+          <summary>Como recebo o kit?</summary>
+          <p>Após a compra você recebe acesso imediato à sua área de membros com todos os arquivos para download.</p>
+        </details>
+        <details>
+          <summary>Preciso ter experiência?</summary>
+          <p>Não. O material foi pensado para iniciantes que estão buscando o primeiro emprego.</p>
+        </details>
+        <details>
+          <summary>Posso editar tudo?</summary>
+          <p>Sim. Os arquivos são fornecidos em formatos editáveis (DOCX, Canva e Markdown), além de PDFs prontos.</p>
+        </details>
+        <details>
+          <summary>A consultoria é obrigatória?</summary>
+          <p>Não. O kit já te coloca no jogo. A consultoria é opcional para quem deseja aceleração com acompanhamento pessoal.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CHECKOUT ANCHOR -->
+    <section id="checkout" aria-label="Seção de checkout">
+      <div class="container cta-band">
+        <div>
+          <strong>Pronto para começar?</strong>
+          <p style="margin:.25rem 0 0; color:var(--muted)">Garanta seu acesso e aplique hoje mesmo.</p>
+        </div>
+        <!-- Substitua o href abaixo pelo link real do seu checkout -->
+        <a class="btn btn-primary" href="https://seu-checkout.com/kit" target="_blank" rel="noopener">Quero meu kit agora</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:center; gap:18px; flex-wrap:wrap">
+      <div class="brand"><span class="brand-badge"></span> QUINTINO CODERS</div>
+      <div>Contato: <a href="mailto:contato@quintinocoders.com">contato@quintinocoders.com</a></div>
+      <div style="color:var(--muted)">© <span id="year"></span> Quintino Coders. Todos os direitos reservados.</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
