@@ -1,355 +1,723 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kit Start na Programação</title>
-  <meta name="description" content="Kit prático para conquistar seu primeiro emprego em programação: currículo, README, LinkedIn e entrevistas, tudo pronto para aplicar." />
-  <meta property="og:title" content="Kit Start na Programação" />
-  <meta property="og:description" content="Conquiste seu primeiro emprego em programação com modelos e checklists práticos." />
-  <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#150a2d" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend+Giga:wght@100..900&family=Rubik+Glitch&display=swap" rel="stylesheet">
+  <title>Quintino Booster — Mentoria para Primeiro Emprego Dev</title>
+  <meta name="description" content="Quintino Booster: mentoria prática para conquistar seu primeiro emprego em tecnologia, com comunidade +2.000 membros e suporte real." />
+
   <style>
-    :root{
-      --bg:#0b0b0f;
-      --text:#ffffff;
-      --muted:#d9d9e3;
-      --primary-1:#3F2B96; /* roxo */
-      --primary-2:#A86CF3; /* lilás */
-      --accent:#E5A1F8;    /* rosa */
-      --card:#111118;
-      --border:rgba(255,255,255,.08);
-      --shadow:0 8px 30px rgba(0,0,0,.35);
-      --radius:18px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:Poppins, Outfit, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      color:var(--text);
-      background: radial-gradient(1200px 800px at 85% -10%, rgba(168,108,243,.18), transparent 60%),
-                  radial-gradient(900px 600px at -10% 20%, rgba(63,43,150,.25), transparent 55%),
-                  var(--bg);
-      line-height:1.65;
-      text-align:center; /* CENTRALIZAÇÃO GLOBAL DE TEXTOS */
-    }
-    a{color:inherit;text-decoration:none}
-    .container{width:min(1120px, 92vw); margin-inline:auto}
-    header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(8px); background:rgba(11,11,15,.55); border-bottom:1px solid var(--border)}
-    .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 0; flex-wrap:wrap; row-gap:10px}
-    .brand{display:flex; gap:10px; align-items:center; font-weight:800; letter-spacing:.4px}
-    .brand-badge{width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--primary-2)); box-shadow:0 0 0 6px rgba(229,161,248,.18)}
-    .menu{display:flex; gap:22px; font-weight:600; font-size:.95rem; color:var(--muted); margin:0 auto}
-    .btn{display:inline-flex; align-items:center; justify-content:center; gap:10px; border:none; cursor:pointer; font-weight:800; letter-spacing:.2px; border-radius:999px; padding:14px 22px; transition:transform .15s ease, box-shadow .2s ease; box-shadow:0 8px 20px rgba(168,108,243,.25)}
-    .btn:hover{transform:translateY(-1px); box-shadow:0 12px 26px rgba(168,108,243,.35)}
-    .btn:active{transform:translateY(0)}
-    .btn-primary{background:linear-gradient(90deg,var(--primary-2), var(--accent)); color:#140a26}
-    .btn-outline{background:transparent; color:var(--muted); border:1px solid var(--border)}
 
-    /* HERO */
-    .hero{padding:96px 0 72px; position:relative}
-    .hero-grid{display:grid; grid-template-columns:1fr; gap:26px; align-items:center; justify-items:center}
-    .kicker{display:inline-block;font-weight:900;letter-spacing:.08em;text-transform:uppercase;font-size:clamp(1rem,2.8vw,1.2rem);color:var(--accent)}
-    .title{font-size:clamp(1.8rem,5.2vw,3.2rem);line-height:1.15;font-weight:900;margin:.35rem 0 1rem;padding:0 8px}
-    .subtitle{color:var(--muted);font-size:clamp(.98rem,2.4vw,1.1rem);max-width:68ch;margin:0 auto;padding:0 10px}
-    .hero-ctas{display:flex; gap:14px; margin-top:8px; flex-wrap:wrap; justify-content:center}
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
-      border:1px solid var(--border); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow); max-width:560px; margin:0 auto
-    }
-    .badge{display:inline-flex; align-items:center; gap:8px; font-size:.9rem; color:var(--muted); justify-content:center; padding:0 10px}
+:root{
+  --bg:#f6f7fb;
+  --ink:#0f172a;
+  --muted:rgba(15,23,42,.78);
+  --muted2:rgba(15,23,42,.62);
+  --p1:#6d28d9;
+  --p2:#4c1d95;
+  --p3:#2a0d4d;
+  --card:rgba(255,255,255,.92);
+  --border:rgba(15,23,42,.12);
+  --shadow: 0 18px 60px rgba(2,6,23,.10);
+  --radius: 18px;
+  --max:1120px;
+}
 
-    /* Sections */
-    section{padding:72px 0}
-    .section-title{font-size:clamp(1.6rem, 3.8vw, 2.6rem); line-height:1.15; font-weight:900; margin:0 0 14px; padding:0 10px}
-    .section-sub{color:var(--muted); margin:0 0 28px; padding:0 10px}
-    .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
-    .grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:24px; align-items:start}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color:var(--ink);
+  background:
+    radial-gradient(1200px 700px at 20% 10%, rgba(109,40,217,.10), transparent 60%),
+    radial-gradient(900px 600px at 85% 30%, rgba(76,29,149,.08), transparent 55%),
+    linear-gradient(180deg, #ffffff, var(--bg) 55%, #ffffff);
+  overflow-x:hidden;
+}
 
-    .feature{position:relative; padding:22px; border-radius:var(--radius); border:1px solid var(--border); background:linear-gradient(180deg, rgba(20,10,38,.8), rgba(11,11,15,.6)); box-shadow:var(--shadow)}
-    .feature h3{margin:6px 0 10px; font-size:1.1rem}
-    .icon{width:20px;height:20px;aspect-ratio:1/1;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--primary-2), var(--accent));color:#140a26;margin:0;font-size:12px;line-height:1;padding:0}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
 
-    .cta-band{padding:30px;border:1px solid var(--border);border-radius:calc(var(--radius) + 6px);display:flex;flex-direction:column;gap:12px;justify-content:center;align-items:center;background:linear-gradient(90deg, rgba(63,43,150,.22), rgba(229,161,248,.10))}
+/* TOPBAR */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter: blur(14px);
+  background:rgba(255,255,255,.85);
+  border-bottom:1px solid rgba(15,23,42,.1);
+}
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;padding:12px 0;
+}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{
+  width:38px;height:38px;border-radius:12px;
+  background:linear-gradient(135deg,var(--p1),var(--p2));
+  display:grid;place-items:center;
+  color:#fff;font-weight:900;
+}
+.links{display:flex;gap:18px}
+.links a{text-decoration: none; font-size:14px;font-weight:700;color:rgba(15,23,42,.75)}
+.links a:hover{color:var(--ink)}
 
-    /* Price */
-    .price-card{display:grid; justify-items:center; gap:16px; padding:28px; border-radius:var(--radius); border:1px solid var(--border); background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); box-shadow:var(--shadow)}
-    .price{font-size:clamp(2.1rem, 4.8vw, 2.8rem); font-weight:900}
-    .guarantee{font-size:1rem; color:var(--muted)}
+/* BUTTONS */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:12px 18px;border-radius:999px;
+  font-weight:800;border:1px solid rgba(15,23,42,.14);
+  background:#fff;cursor:pointer;
+  transition:.2s;
+}
+.btn.primary{
+  background:linear-gradient(135deg,var(--p1),var(--p2));
+  color:#fff;border:none;
+}
+.btn:hover{transform:translateY(-1px)}
 
-    /* FAQ */
-    details{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid var(--border); border-radius:14px; padding:16px 18px; margin-bottom:12px; text-align:left; max-width:860px; margin-inline:auto}
-    summary{cursor:pointer; font-weight:800}
-    details[open]{box-shadow:0 12px 40px rgba(0,0,0,.28)}
+/* HERO */
+.hero{padding:48px 0 24px}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:26px;
+}
+.badge{
+  display:inline-flex;
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid rgba(15,23,42,.14);
+  background:#fff;
+  font-size:13px;
+  font-weight:800;
+}
+h1{
+  font-size:clamp(30px,5vw,54px);
+  line-height:1.05;
+  margin:16px 0 12px;
+}
+.lead{
+  font-size:16px;
+  line-height:1.7;
+  max-width:60ch;
+  color:var(--muted);
+}
+.hero-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:16px;
+}
 
-    /* Footer */
-    footer{padding:48px 0; border-top:1px solid var(--border); color:var(--muted); font-size:.9rem}
+/* HERO CARD */
+.hero-card{
+  background:#fff;
+  border-radius:var(--radius);
+  border:1px solid var(--border);
+  padding:20px;
+  box-shadow:var(--shadow);
+  position:relative;
+}
+.kpi{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.k{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:12px;
+}
+.k b{font-size:20px}
+.k span{font-size:13px;color:var(--muted2)}
 
-    /* Responsive tweaks */
-    @media (max-width: 1024px){
-      .menu{gap:16px}
-      .grid-3{grid-template-columns:1fr 1fr}
-      .grid-2{grid-template-columns:1fr}
-      .hero-ctas .btn{min-width:260px}
-    }
-    @media (max-width: 720px){
-      .menu{display:none}
-      .nav{justify-content:space-between; padding:10px 0}
-      header .btn{width:auto; max-width:none; padding:8px 12px; font-size:.85rem; border-radius:12px; box-shadow:none}
-      .brand{width:auto; justify-content:flex-start}
-      .cta-band{flex-direction:column}
-      .cta-band .btn{width:100%; max-width:340px}
-      .grid-3{grid-template-columns:1fr}
-      .hero{padding:64px 0 44px}
-      .badge{font-size:.85rem}
-      footer{font-size:.8rem}
-    }
-      .menu{display:none}
-      .cta-band{flex-direction:column}
-      .cta-band .btn{width:100%; max-width:340px}
-      .grid-3{grid-template-columns:1fr}
-      .brand{width:100%; justify-content:center}
-      .nav{justify-content:center}
-      .hero{padding:64px 0 44px}
-      .badge{font-size:.85rem}
-    }
-      .menu{display:none}
-      .cta-band{flex-direction:column}
-      .cta-band .btn{width:100%; max-width:340px}
-      .grid-3{grid-template-columns:1fr}
-      .brand{width:100%; justify-content:center}
-      .nav{justify-content:center}
-      .hero{padding:72px 0 56px}
-      .badge{font-size:.88rem}
-    }
+/* SECTIONS */
+section{padding:40px 0}
+.section-title{
+  font-size:clamp(22px,4vw,36px);
+  margin-bottom:10px;
+}
+.section-desc{
+  max-width:75ch;
+  line-height:1.7;
+  color:var(--muted);
+}
 
-    /* Extra Mobile Tweaks */
-    @media (max-width: 480px){
-      body{line-height:1.55}
-      .hero{padding:52px 0 36px}
-      section{padding:56px 0}
-      .title{font-size:1.9rem; line-height:1.2}
-      .kicker{font-size:1rem; letter-spacing:.06em}
-      .subtitle{font-size:1rem}
-      .section-title{font-size:1.45rem}
-      .btn{width:100%; max-width:320px; padding:14px 18px; font-size:1rem}
-      .price{font-size:2.1rem}
-      details, summary{font-size:1rem}
-      ol, ol li{ text-align:left !important }
-      .icon{width:18px;height:18px;font-size:11px}
-      .cta-band{gap:8px}
-      footer{font-size:.75rem}
-    }
-      .hero{padding:52px 0 36px}
-      section{padding:56px 0}
-      .title{font-size:1.9rem; line-height:1.2}
-      .kicker{font-size:1rem; letter-spacing:.06em}
-      .subtitle{font-size:1rem}
-      .section-title{font-size:1.45rem}
-      .btn{width:100%; max-width:320px; padding:14px 18px; font-size:1rem}
-      .price{font-size:2.1rem}
-      details, summary{font-size:1rem}
-      ol{font-size:1rem}
-      .cta-band{gap:8px}
-    }
+/* GRIDS */
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grid-2{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
 
-    /* Motion */
-    @media (prefers-reduced-motion: no-preference){
-      .fade-up{opacity:0; transform:translateY(10px); animation:rise .7s ease .05s forwards}
-      @keyframes rise{to{opacity:1; transform:none}}
-    }
-    /* Garantir alinhamento à esquerda nos passos */
-    section ol{ text-align:left }
-    section ol li{ text-align:left }
+/* CARD */
+.card{
+  background:#fff;
+  border-radius:var(--radius);
+  border:1px solid var(--border);
+  padding:18px;
+  box-shadow:0 14px 35px rgba(2,6,23,.06);
+}
+.card strong{display:block;margin-bottom:6px}
+.card p{margin:0;line-height:1.6;color:var(--muted)}
+
+/* ACCORDION */
+.acc{
+  border-radius:16px;
+  border:1px solid var(--border);
+  background:#fff;
+  overflow:hidden;
+}
+.acc button{
+  width:100%;
+  padding:14px 16px;
+  font-weight:900;
+  background:none;
+  border:none;
+  display:flex;
+  justify-content:space-between;
+  cursor:pointer;
+}
+.acc .content{
+  display:none;
+  padding:0 16px 14px;
+  font-size:14px;
+  line-height:1.6;
+  color:var(--muted);
+}
+.acc.open .content{display:block}
+
+/* FINAL */
+.final{
+  background:#fff;
+  border-radius:var(--radius);
+  padding:26px;
+  border:1px solid var(--border);
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:980px){
+  .hero-grid{grid-template-columns:1fr}
+  .grid-4{grid-template-columns:1fr 1fr}
+  .grid-3{grid-template-columns:1fr}
+  .grid-2{grid-template-columns:1fr}
+  .links{display:none}
+}
+
+@media(max-width:520px){
+  h1{text-align:center}
+  .lead{text-align:center}
+  .badge{margin:0 auto}
+  .hero-actions .btn{width:100%}
+  .kpi{grid-template-columns:1fr}
+  .grid-4{grid-template-columns:1fr}
+  section{padding:32px 0}
+}
+
   </style>
 </head>
+
 <body>
-  <header>
-    <div class="container nav">
-      <div class="brand" aria-label="Quintino Coders">
-        <span class="brand-badge" aria-hidden="true"></span>
-        QUINTINO CODERS
+  <!-- ============ TOPBAR ============ -->
+  <div class="topbar">
+    <div class="wrap">
+      <div class="nav">
+        <div class="brand">
+          <div class="logo">QC</div>
+          <div>
+            <b>Quintino Booster</b>
+            <small>Seu primeiro emprego DEV garantido</small>
+          </div>
+        </div>
+
+        <div class="links">
+          <a href="#como-funciona">Como funciona</a>
+          <a href="#pra-quem">Para quem é</a>
+          <a href="#conteudo">O que você desenvolve</a>
+          <a href="#garantia">Garantia</a>
+        </div>
+
+        <div class="right">
+        </div>
       </div>
-      <nav class="menu" aria-label="Menu principal">
-        <a href="#beneficios">O que você recebe</a>
-        <a href="#como-funciona">Como funciona</a>
-        <a href="#preco">Investimento</a>
-        <a href="#faq">Dúvidas</a>
-      </nav>
-      <a class="btn btn-primary" href="https://pay.kiwify.com.br/p5qvui9" aria-label="Ir para o checkout">Quero meu kit</a>
+    </div>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="badge">Fundador da Quintino Coders — comunidade com +2.000 programadores</div>
+
+          <h1>Conquiste seu primeiro emprego  como programador<br/>ou receba seu dinheiro inteiro de volta</h1>
+          <p class="lead">
+            Participe do <b>Quintino Booster</b>, uma mentoria prática onde te acompanho
+            <b>do currículo à contratação</b> com plano individual, feedback, projetos, avaliações de curriculo, envios de vagas personalizadas e muito mais.
+            Aqui o foco é <b>empregabilidade real</b>,não teoria infinita.
+          </p>
+
+          <div class="hero-actions">
+            <!-- ✅ TROQUE o href por WhatsApp/Checkout -->
+            <a class="btn primary" href="https://pay.kiwify.com.br/d9puKrg" target="_blank" rel="noopener">
+              👉 Quero entrar agora
+            </a>
+            <a class="btn" href="#garantia">Ver a garantia</a>
+          </div>
+
+          <div class="note">
+            * Vagas limitadas para manter acompanhamento real. Sem promessas milagrosas — método + constância.
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="stamp">
+            <div>
+              <div class="big">0%</div>
+              <small class="mid">enrolação</small>
+              <small>foco em contratação</small>
+            </div>
+          </div>
+
+          <strong style="font-size:16px">Resumo rápido do que você recebe</strong>
+          <p class="mini" style="margin-top:8px">
+            Mentoria + plano de candidatura + currículo/LinkedIn + entrevistas + direção de portfólio + avaliações + envios de vagas personalizadas.
+          </p>
+
+          <div class="kpi">
+            <div class="k">
+              <b>Plano semanal</b>
+              <span>metas, candidaturas, ajustes, projetos e etc</span>
+            </div>
+            <div class="k">
+              <b>Feedback</b>
+              <span>currículo, LinkedIn, postura</span>
+            </div>
+            <div class="k">
+              <b>Comunidade</b>
+              <span>vagas, suporte e networking</span>
+            </div>
+            <div class="k">
+              <b>Processo</b>
+              <span>currículo → entrevistas → contratação</span>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+          <p class="mini">
+            ✅ Plano semanal claro, sem confusão. <br/>
+
+✅ Feedback humano, não automático.<br/>
+
+✅ Foco total em vagas reais, não exercícios aleatórios.<br/>
+
+✅ Método validado por quem já passou pelo processo.<br/>
+
+✅ Acompanhamento de verdade (você não fica largado).<br/>
+
+✅ Execução guiada até a contratação.<br/>
+
+✅ Comunidade que cobra, apoia e acelera.<br/>
+
+✅ Nada de promessas vazias — só processo e constância.
+          </p>
+        </div>
+      </div>
     </div>
   </header>
 
-  <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="container hero-grid">
-          <span class="kicker">Start na Programação</span>
-          <h1 class="title">Dê o primeiro passo real para conquistar seu primeiro emprego em programação.</h1>
-          <p class="subtitle">Um kit prático com currículo, README de GitHub, checklist de LinkedIn e guia de entrevistas. Feito para aplicar em minutos, não em semanas.</p>
-          <div class="hero-ctas">
-            <a class="btn btn-primary" href="https://pay.kiwify.com.br/p5qvui9">Quero meu kit agora</a>
-          </div>
-          <div class="badge" style="margin-top:16px">
-            <span class="icon" aria-hidden="true">✓</span>
-            Acesso imediato • Arquivos editáveis (PDF, DOCX, MD, Canva)
-          </div>
-          <aside class="card fade-up" style="margin-top:22px">
-            <strong>Feito para iniciantes.</strong>
-            <p style="margin:.4rem 0 0; color:var(--muted)">Sem experiência? Sem problema. O foco é te apresentar como um profissional pronto.</p>
-          </aside>
-      </div>
-    </section>
+  <!-- ============ HIGHLIGHTS ============ -->
+  <section id="como-funciona">
+    <div class="wrap">
+      <h2 class="section-title">Mentoria completa, prática e com suporte real</h2>
+      <p class="section-desc">
+        A maioria estuda muito e continua sem resposta nas vagas porque não tem <b>estratégia</b> e muito menos <b>prática</b>.
+        O Quintino Booster existe para virar esse jogo com um plano executável.
+      </p>
 
-    <!-- BENEFÍCIOS -->
-    <section id="beneficios">
-      <div class="container">
-        <h2 class="section-title">Tudo o que você recebe</h2>
-        <p class="section-sub">Ferramentas essenciais, prontas para você personalizar e usar hoje.</p>
-        <div class="grid-3">
-          <div class="feature">
-            <div class="icon" aria-hidden="true">📄</div>
-            <h3>Currículo Profissional</h3>
-            <p style="color:var(--muted)">Modelo editável e clean, pensado para destacar habilidades, projetos e objetivos — mesmo sem experiência formal.</p>
-          </div>
-          <div class="feature">
-            <div class="icon" aria-hidden="true">🗂️</div>
-            <h3>README de GitHub</h3>
-            <p style="color:var(--muted)">Template pronto em Markdown para transformar seu perfil em uma vitrine organizada e atrativa.</p>
-          </div>
-          <div class="feature">
-            <div class="icon" aria-hidden="true">💼</div>
-            <h3>Checklist LinkedIn</h3>
-            <p style="color:var(--muted)">Passo a passo para um perfil encontrável e convincente para recrutadores.</p>
-          </div>
-          <div class="feature">
-            <div class="icon" aria-hidden="true">🎯</div>
-            <h3>Mini Guia de Entrevistas</h3>
-            <p style="color:var(--muted)">10 perguntas básicas com respostas objetivas e dicas para comunicar com clareza.</p>
-          </div>
-          <div class="feature">
-            <div class="icon" aria-hidden="true">🧩</div>
-            <h3>Projetos para Portfólio</h3>
-            <p style="color:var(--muted)">Ideias simples e eficazes para demonstrar habilidades técnicas com links de referência.</p>
-          </div>
-          <div class="feature">
-            <div class="icon" aria-hidden="true">⚡</div>
-            <h3>Aplicação Rápida</h3>
-            <p style="color:var(--muted)">Baixe, personalize e publique. Sem perda de tempo e sem adivinhação.</p>
-          </div>
+      <div class="grid-4">
+        <div class="card">
+          <strong>Mentoria completa</strong>
+          <p>Acompanhamento e plano individual para seu objetivo: <b>contratação</b>.</p>
         </div>
-
-        <div class="cta-band" style="margin-top:26px">
-          <div>
-            <strong>Pronto para aplicar ainda hoje?</strong>
-            <p style="margin:.25rem 0 0; color:var(--muted)">Acelere seu começo com materiais que recrutadores realmente olham.</p>
-          </div>
-          <a class="btn btn-primary" href="#checkout">Garantir acesso</a>
+        <div class="card">
+          <strong>Prática + Comunidade</strong>
+          <p>Você não fica sozinho. A comunidade acelera com vagas, apoio e networking.</p>
+        </div>
+        <div class="card">
+          <strong>Foco em empregabilidade</strong>
+          <p>Currículo, LinkedIn, candidaturas e entrevistas — o que dá resultado de verdade.</p>
+        </div>
+        <div class="card">
+          <strong>Reconhecimento real</strong>
+          <p>Troféus e marcos de evolução para manter constância e motivação.</p>
         </div>
       </div>
-    </section>
-
-    <!-- COMO FUNCIONA / PREÇO -->
-    <section id="como-funciona">
-      <div class="container grid-2" style="justify-items:center">
-        <div>
-          <h2 class="section-title">Como funciona</h2>
-          <ol style="padding-left:18px; color:var(--muted); text-align:left; max-width:620px; margin:0 auto">
-            <li style="margin-bottom:10px"><strong>Baixe os arquivos</strong> na sua área de membros.</li>
-            <li style="margin-bottom:10px"><strong>Personalize</strong> com seus dados, projetos e links.</li>
-            <li><strong>Publique e envie</strong> junto com suas candidaturas e networking.</li>
-          </ol>
-          <p class="section-sub">Simples de começar. Poderoso para te apresentar como profissional.</p>
-        </div>
-        <div class="price-card" id="preco">
-          <div>
-            <div class="badge"><span class="icon">★</span> Melhor custo-benefício</div>
-          </div>
-          <h3 style="margin:0">Investimento</h3>
-          <div class="price">R$ 47</div>
-          <p class="guarantee">Acesso imediato • Atualizações incluídas • Compra segura</p>
-          <a class="btn btn-primary" href="https://pay.kiwify.com.br/p5qvui9">Quero meu kit agora</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- AUTORIDADE / PROVA SOCIAL -->
-    <section>
-      <div class="container">
-        <h2 class="section-title">Feito por quem vive isso todos os dias</h2>
-        <p class="section-sub">Mais de <strong>2.000 programadores iniciantes</strong> fazem parte da comunidade <strong>Quintino Coders</strong>, aprendendo, evoluindo e conquistando oportunidades.</p>
-        <div class="grid-3">
-          <div class="card"><strong>Foco no essencial</strong><p style="color:var(--muted)">Nada de teoria infinita. Apenas o necessário para destravar entrevistas.</p></div>
-          <div class="card"><strong>Design profissional</strong><p style="color:var(--muted)">Arquivos pensados para leitura rápida por recrutadores.</p></div>
-          <div class="card"><strong>Pronto para usar</strong><p style="color:var(--muted)">Você aplica hoje e já melhora sua apresentação.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONSULTORIA -->
-    <section id="consultoria">
-      <div class="container">
-        <h2 class="section-title">Quer ir mais rápido?</h2>
-        <p class="section-sub">Além do kit, você pode agendar a <strong>Consultoria Exclusiva</strong> para revisão de currículo, GitHub e LinkedIn, preparo para entrevistas e um plano de ação individual.</p>
-        <p class="section-sub">Assim como o kit, é um investimento na sua carreira. Quanto melhor o investimento, mais rápidos os resultados.</p>
-        <a class="btn btn-outline" href="https://pay.kiwify.com.br/d9puKrg">Agendar consultoria</a>
-        <div class="card" style="max-width:560px; margin:18px auto 0"><strong>Atenção</strong><p style="color:var(--muted)">Vagas limitadas para garantir acompanhamento pessoal de qualidade.</p></div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq">
-      <div class="container">
-        <h2 class="section-title">Dúvidas frequentes</h2>
-        <details>
-          <summary>Como recebo o kit?</summary>
-          <p>Após a compra você recebe acesso imediato à sua área de membros com todos os arquivos para download.</p>
-        </details>
-        <details>
-          <summary>Preciso ter experiência?</summary>
-          <p>Não. O material foi pensado para iniciantes que estão buscando o primeiro emprego.</p>
-        </details>
-        <details>
-          <summary>Posso editar tudo?</summary>
-          <p>Sim. Os arquivos são fornecidos em formatos editáveis (DOCX, Canva e Markdown), além de PDFs prontos.</p>
-        </details>
-        <details>
-          <summary>A consultoria é obrigatória?</summary>
-          <p>Não. O kit já te coloca no jogo. A consultoria é opcional para quem deseja aceleração com acompanhamento pessoal.</p>
-        </details>
-      </div>
-    </section>
-
-    <!-- CHECKOUT ANCHOR -->
-    <section id="checkout" aria-label="Seção de checkout">
-      <div class="container cta-band">
-        <div>
-          <strong>Pronto para começar?</strong>
-          <p style="margin:.25rem 0 0; color:var(--muted)">Garanta seu acesso e aplique hoje mesmo.</p>
-        </div>
-        <!-- Substitua o href abaixo pelo link real do seu checkout -->
-        <a class="btn btn-primary" href="https://pay.kiwify.com.br/p5qvui9" target="_blank" rel="noopener">Quero meu kit agora</a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container" style="display:flex; justify-content:center; gap:18px; flex-wrap:wrap">
-      <div class="brand"><span class="brand-badge"></span> QUINTINO CODERS</div>
-      <div>Contato: <a href="mailto:contato@quintinocoders.com">contato@quintinocoders.com</a></div>
-      <div style="color:var(--muted)">© <span id="year"></span> Quintino Coders. Todos os direitos reservados.</div>
     </div>
-  </footer>
+  </section>
+
+  <!-- ============ CAREER / KPI ============ -->
+  <section>
+    <div class="wrap">
+      <div class="grid-2">
+        <div>
+          <h2 class="section-title">Uma carreira em tecnologia começa com a estratégia certa</h2>
+          <p class="section-desc">
+            Muita gente não está sem emprego por falta de estudo — está travada por:
+            <b>currículo fraco</b>, <b>LinkedIn mal posicionado</b>, <b>candidaturas sem método</b>
+            e <b>entrevistas sem preparo</b>.
+            <br/><br/>
+            Aqui você aprende a se apresentar como <b>contratável</b>, com um plano semanal simples e repetível.
+          </p>
+
+          <div class="grid-3">
+            <div class="card soft">
+              <strong>📄 Currículo que passa no “olho do recrutador”</strong>
+              <p>Estrutura objetiva, sem enrolação e alinhada com vagas reais.</p>
+            </div>
+            <div class="card soft">
+              <strong>🔎 Método de candidaturas</strong>
+              <p>Onde aplicar, como aplicar e como acompanhar retorno.</p>
+            </div>
+            <div class="card soft">
+              <strong>🎤 Entrevistas</strong>
+              <p>Simulações + ajustes na postura e nas respostas.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="side">
+          <h3>Indicadores (ajuste como quiser)</h3>
+
+          <p class="big">+2.000</p>
+          <div class="row">
+            <b>pessoas na comunidade</b>
+            <span>Quintino Coders (base de apoio)</span>
+          </div>
+
+          <div class="row">
+            <b>Plano semanal</b>
+            <span>metas e execução guiada</span>
+          </div>
+
+          <div class="row">
+            <b>Objetivo único</b>
+            <span>contratação, não “estudo infinito”</span>
+          </div>
+
+          <p class="mini" style="margin-top:12px">
+           
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOR WHO ============ -->
+  <section id="pra-quem">
+    <div class="wrap">
+      <h2 class="section-title">Para quem o Quintino Booster é indicado</h2>
+      <p class="section-desc">
+        Três perfis que mais entram e mais evoluem rápido:
+      </p>
+
+      <div class="grid-3">
+        <div class="card">
+          <strong>Iniciantes em tecnologia</strong>
+          <p>Você está começando e quer um caminho claro para o <b>primeiro emprego</b>.</p>
+        </div>
+        <div class="card">
+          <strong>Dev Júnior travado</strong>
+          <p>Você já estudou, já aplicou, mas <b>não recebe retorno</b> ou não passa nas etapas.</p>
+        </div>
+        <div class="card">
+          <strong>Transição de carreira</strong>
+          <p>Quer entrar em tecnologia com método, sem perder tempo e sem ficar andando em círculos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHAT YOU DEVELOP ============ -->
+  <section id="conteudo">
+    <div class="wrap">
+      <h2 class="section-title">O que você vai desenvolver no Booster</h2>
+      <p class="section-desc">
+        Isso aqui é a “espinha dorsal” da sua empregabilidade.
+      </p>
+
+      <div class="grid-3">
+        <div class="card">
+          <strong>✅ Currículo e LinkedIn estratégicos</strong>
+          <p>Você aprende a se posicionar como <b>contratável</b>, e não só como estudante.</p>
+        </div>
+        <div class="card">
+          <strong>✅ Plano de candidatura</strong>
+          <p>Quantas vagas por dia, quais vagas, e como medir resultado sem ansiedade.</p>
+        </div>
+        <div class="card">
+          <strong>✅ Portfólio e projetos</strong>
+          <p>Direção de projeto que realmente conta para quem contrata (sem “projetinho aleatório”).</p>
+        </div>
+        <div class="card">
+          <strong>✅ Entrevistas</strong>
+          <p>Treino de respostas, simulação, e ajuste do seu discurso e postura.</p>
+        </div>
+        <div class="card">
+          <strong>✅ Constância</strong>
+          <p>Porque a maior diferença entre quem consegue e quem não consegue é: <b>continuar</b>.</p>
+        </div>
+        <div class="card">
+          <strong>✅ Comunidade</strong>
+          <p>Networking, suporte e um ambiente que te empurra pra frente.</p>
+        </div>
+      </div>
+
+      <div style="height:18px"></div>
+
+      <!-- “MÓDULOS” estilo accordion (igual print) -->
+      <div class="accordion" aria-label="Módulos (accordion)">
+        <div class="acc open">
+          <div class="accordion" aria-label="Etapas até a contratação">
+
+  <div class="acc open">
+    <button type="button">
+      Parte 1 — Posicionamento (Currículo + LinkedIn)
+      <span class="plus">+</span>
+    </button>
+    <div class="content">
+      Ajuste do seu currículo e LinkedIn com foco em recrutador: clareza, impacto, palavras-chave e narrativa profissional.
+    </div>
+  </div>
+
+  <div class="acc">
+    <button type="button">
+      Parte 2 — Direção Técnica (o que estudar e o que ignorar)
+      <span class="plus">+</span>
+    </button>
+    <div class="content">
+      Definição clara do foco técnico para seu nível, evitando estudo aleatório e direcionando apenas para o que aparece nas vagas reais.
+    </div>
+  </div>
+
+  <div class="acc">
+    <button type="button">
+      Parte 3 — Portfólio Estratégico (projetos que contam ponto)
+      <span class="plus">+</span>
+    </button>
+    <div class="content">
+      Projetos com objetivo claro, README forte, demonstração prática e discurso pronto para entrevistas — sem projetos genéricos.
+    </div>
+  </div>
+
+  <div class="acc">
+    <button type="button">
+      Parte 4 — Plano de Candidaturas (método + rotina)
+      <span class="plus">+</span>
+    </button>
+    <div class="content">
+      Onde aplicar, como aplicar, quantas vagas por dia, acompanhamento de respostas e ajustes do funil para gerar retorno.
+    </div>
+  </div>
+
+  <div class="acc">
+    <button type="button">
+      Parte 5 — Networking Inteligente (sem mendigar vaga)
+      <span class="plus">+</span>
+    </button>
+    <div class="content">
+      Uso estratégico do LinkedIn, comunidade e contatos para aumentar chances reais de entrevistas sem mensagens constrangedoras.
+    </div>
+  </div>
+
+  <div class="acc">
+    <button type="button">
+      Parte 6 — Entrevistas (simulação + feedback)
+      <span class="plus">+</span>
+    </button>
+    <div class="content">
+      Simulações de entrevistas técnicas e comportamentais, ajustes de postura, discurso e confiança para passar nas etapas.
+    </div>
+  </div>
+
+  <div class="acc">
+    <button type="button">
+      Parte 7 — Execução e Constância (até a contratação)
+      <span class="plus">+</span>
+    </button>
+    <div class="content">
+      Rotina simples, metas semanais, acompanhamento e ajustes constantes até chegar na aprovação final.
+    </div>
+  </div>
+
+  <div class="acc">
+    <button type="button">
+      Parte 8 — Negociação e Entrada no Emprego
+      <span class="plus">+</span>
+    </button>
+    <div class="content">
+      Orientação para aceite de proposta, salário inicial e como se posicionar nos primeiros dias para não entrar perdido.
+    </div>
+  </div>
+
+</div>
+
+
+      <p class="mini" style="margin-top:12px">
+      
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ LEARN BY DOING ============ -->
+  <section>
+    <div class="wrap">
+      <div class="grid-2">
+        <div>
+          <h2 class="section-title">Aprenda na prática (mentoria, não curso)</h2>
+          <p class="section-desc">
+            Aqui não é “assiste aula e se vira”.
+            Você executa, recebe feedback e ajusta a rota com clareza.
+          </p>
+
+          <div class="grid-3">
+            <div class="card soft">
+              <strong>Sem enrolação</strong>
+              <p>Plano simples e repetível.</p>
+            </div>
+            <div class="card soft">
+              <strong>Feedback real</strong>
+              <p>Currículo, LinkedIn, portfólio e entrevistas.</p>
+            </div>
+            <div class="card soft">
+              <strong>Meta única</strong>
+              <p>Chegar na contratação.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <strong>O que muda na sua rotina</strong>
+          <p>
+            Você deixa de “estudar no escuro” e passa a trabalhar com um funil:
+            <br/><br/>
+            <b>Posicionamento</b> → <b>Candidaturas</b> → <b>Entrevistas</b> → <b>Oferta</b>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GUARANTEE ============ -->
+  <section id="garantia">
+    <div class="wrap">
+      <h2 class="section-title">Garantia: conquiste seu emprego ou receba seu dinheiro de volta</h2>
+      <p class="section-desc">
+        Se após <b>6 meses de acompanhamento ativo</b> (seguindo o plano, entregas e rotina acordada),
+        você <b>não conquistar seu primeiro emprego</b>, devolvemos o valor investido.
+        <br/><br/>
+        <span class="mini">
+         A garantia existe porque confiamos no método — mas exige comprometimento. Crie uma página “Regras da Garantia”.
+        </span>
+      </p>
+
+      <div class="grid-3">
+        <div class="card">
+          <strong>✅ Compromisso do mentorado</strong>
+          <p>Seguir rotina e entregas combinadas.</p>
+        </div>
+        <div class="card">
+          <strong>✅ Compromisso do Booster</strong>
+          <p>Acompanhamento, plano e feedbacks.</p>
+        </div>
+        <div class="card">
+          <strong>✅ Transparência total</strong>
+          <p>Sem promessas mágicas, só processo + execução.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TROPHIES ============ -->
+  <section>
+    <div class="wrap">
+      <div class="trophy">
+        <h2 class="section-title">Reconhecimento real com troféus 3D</h2>
+        <p class="section-desc">
+          Você vai usar a evolução como combustível. No Quintino Booster, conquistas são reconhecidas.
+        </p>
+        <div class="tags">
+          <span class="tag">🏆 Troféu Primeiro Emprego Dev</span>
+          <span class="tag">🏅 Mentorado Mais Dedicado</span>
+          <span class="tag">🚀 Marcos de evolução</span>
+          <span class="tag">📸 Fotos para feedbacks (reais)</span>
+        </div>
+        <p class="mini" style="margin-top:12px">
+         
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section id="entrar">
+    <div class="wrap">
+      <div class="final">
+        <h2>Pronto para parar de tentar sozinho?</h2>
+        <p>
+          Você pode continuar estudando sem direção, ou entrar em um programa feito para te levar
+          até a contratação com método, acompanhamento e comunidade.
+        </p>
+
+        <div class="hero-actions">
+          <!-- ✅ TROQUE o link (WhatsApp/Checkout/Form) -->
+          <a class="btn primary" href="https://pay.kiwify.com.br/d9puKrg" target="_blank" rel="noopener">
+            👉 Entrar para o Quintino Booster
+          </a>
+          <a class="btn" href="#como-funciona">Ver como funciona</a>
+        </div>
+
+        <div class="divider"></div>
+        <p class="mini">
+          © <span id="year"></span> Quintino Booster — Mentoria. <br/>
+         Resultados variam de acordo com dedicação, mercado e execução do plano.
+        </p>
+      </div>
+
+      <footer>
+        <div class="wrap" style="padding:0">
+          <div style="display:flex; gap:14px; flex-wrap:wrap; align-items:center; justify-content:space-between;">
+            <span>Quintino Booster • feito para te colocar no jogo</span>
+            <span class="mini"></b></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </section>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // ano automático
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // accordion
+    document.querySelectorAll(".acc button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const acc = btn.closest(".acc");
+        const isOpen = acc.classList.contains("open");
+        document.querySelectorAll(".acc").forEach(a => a.classList.remove("open"));
+        if(!isOpen) acc.classList.add("open");
+      });
+    });
+
+    // scroll suave (âncoras)
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener("click", (e) => {
+        const href = a.getAttribute("href");
+        if(!href || href === "#") return;
+        const el = document.querySelector(href);
+        if(el){
+          e.preventDefault();
+          el.scrollIntoView({ behavior:"smooth", block:"start" });
+        }
+      });
+    });
   </script>
 </body>
 </html>
