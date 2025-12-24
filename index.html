@@ -27,17 +27,22 @@
       --ok:#22c55e;
       --warn:#f59e0b;
       --bad:#ef4444;
+
+      --ease: cubic-bezier(.2,.8,.2,1);
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
+
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       color:var(--ink);
+      --px: 0px;
+      --py: 0px;
       background:
-        radial-gradient(1200px 700px at 16% 8%, rgba(109,40,217,.16), transparent 60%),
-        radial-gradient(900px 600px at 90% 26%, rgba(76,29,149,.14), transparent 55%),
+        radial-gradient(1200px 700px at calc(16% + var(--px)) calc(8% + var(--py)), rgba(109,40,217,.16), transparent 60%),
+        radial-gradient(900px 600px at calc(90% + var(--px)) calc(26% + var(--py)), rgba(76,29,149,.14), transparent 55%),
         linear-gradient(180deg, #ffffff, var(--bg) 55%, #ffffff);
       overflow-x:hidden;
     }
@@ -57,12 +62,28 @@
     }
     .dot{width:8px;height:8px;border-radius:999px;background:var(--ok);display:inline-block}
 
+    /* ===== Progress bar (leitura) ===== */
+    .readbar{
+      position:fixed;left:0;top:0;height:3px;width:100%;
+      z-index:9999;background:transparent;
+    }
+    .readbar > i{
+      display:block;height:100%;width:0%;
+      background:linear-gradient(90deg, var(--p1), var(--p2));
+      box-shadow:0 10px 25px rgba(109,40,217,.35);
+    }
+
     /* TOPBAR */
     .topbar{
       position:sticky;top:0;z-index:50;
       backdrop-filter: blur(14px);
       background:rgba(255,255,255,.86);
       border-bottom:1px solid rgba(15,23,42,.10);
+      transition:box-shadow .25s var(--ease), background .25s var(--ease);
+    }
+    .topbar.scrolled{
+      background:rgba(255,255,255,.92);
+      box-shadow:0 16px 45px rgba(2,6,23,.10);
     }
     .nav{
       display:flex;align-items:center;justify-content:space-between;
@@ -103,10 +124,19 @@
       background:linear-gradient(135deg,var(--p1),var(--p2));
       color:#fff;border:none;
       box-shadow:0 18px 45px rgba(109,40,217,.30);
+      position:relative;
+      overflow:hidden;
     }
-    .btn.ghost{
-      background:rgba(255,255,255,.65);
+    /* Shine */
+    .btn.primary:after{
+      content:"";
+      position:absolute;inset:-80px -120px;
+      background:linear-gradient(120deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%);
+      transform:translateX(-60%) rotate(10deg);
+      transition:transform .75s var(--ease);
     }
+    .btn.primary:hover:after{transform:translateX(60%) rotate(10deg)}
+    .btn.ghost{background:rgba(255,255,255,.65)}
     .btn:hover{transform:translateY(-1px)}
 
     /* HERO */
@@ -247,14 +277,10 @@
     }
     .card strong{display:block;margin-bottom:6px}
     .card p{margin:0;line-height:1.6;color:var(--muted)}
-    .card.soft{
-      background:rgba(255,255,255,.70);
-    }
+    .card.soft{background:rgba(255,255,255,.70)}
 
     /* TIMELINE */
-    .timeline{
-      display:grid;gap:10px;margin-top:10px;
-    }
+    .timeline{display:grid;gap:10px;margin-top:10px}
     .step{
       display:flex;gap:12px;align-items:flex-start;
       padding:14px;border-radius:16px;
@@ -319,9 +345,7 @@
       font-size:38px;font-weight:950;letter-spacing:-1px;
     }
     .price .value small{font-size:14px;color:var(--muted2);font-weight:900}
-    .price .anchor{
-      font-size:13px;color:var(--muted2);font-weight:900;
-    }
+    .price .anchor{font-size:13px;color:var(--muted2);font-weight:900}
     .pricing-body{padding:18px}
     .inc{display:grid;gap:10px;margin-top:10px}
     .inc .item{
@@ -350,9 +374,7 @@
     .scarcity span{font-size:13px;color:rgba(15,23,42,.70);font-weight:900}
 
     /* FAQ accordion */
-    .faq{
-      display:grid;gap:10px;margin-top:10px;
-    }
+    .faq{display:grid;gap:10px;margin-top:10px}
     .acc{
       border-radius:16px;
       border:1px solid rgba(15,23,42,.12);
@@ -379,15 +401,26 @@
       color:rgba(109,40,217,.95);
       font-weight:950;
       flex:0 0 auto;
+      transition:transform .25s var(--ease), opacity .25s var(--ease);
     }
+    /* Accordion animado */
     .acc .content{
-      display:none;
-      padding:0 16px 14px;
+      display:block;
+      max-height:0;
+      overflow:hidden;
+      opacity:0;
+      padding:0 16px;
+      transition:max-height .5s var(--ease), opacity .35s var(--ease), padding .35s var(--ease);
       font-size:14px;
       line-height:1.65;
       color:var(--muted);
     }
-    .acc.open .content{display:block}
+    .acc.open .content{
+      max-height:280px;
+      opacity:1;
+      padding:0 16px 14px;
+    }
+    .acc.open button .plus{transform:rotate(45deg);opacity:.9}
 
     /* FINAL */
     .final{
@@ -413,6 +446,43 @@
       padding:0;
     }
 
+    /* ===== Reveal / Lift / Float / Tilt ===== */
+    .lift{
+      transition:transform .25s var(--ease), box-shadow .25s var(--ease);
+    }
+    .lift:hover{
+      transform:translateY(-6px);
+      box-shadow:0 22px 60px rgba(2,6,23,.14);
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(18px) scale(.985);
+      transition:opacity .7s var(--ease), transform .7s var(--ease);
+      will-change:opacity, transform;
+    }
+    .reveal.in{opacity:1;transform:translateY(0) scale(1)}
+    .reveal[data-delay="1"]{transition-delay:.06s}
+    .reveal[data-delay="2"]{transition-delay:.12s}
+    .reveal[data-delay="3"]{transition-delay:.18s}
+    .reveal[data-delay="4"]{transition-delay:.24s}
+
+    .floaty{animation:floaty 6.5s var(--ease) infinite}
+    @keyframes floaty{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-8px)}
+    }
+
+    .tilt{
+      transform-style:preserve-3d;
+      will-change:transform;
+    }
+
+    /* Preferências de acessibilidade */
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important; transition:none !important; scroll-behavior:auto !important;}
+    }
+
     /* RESPONSIVE */
     @media(max-width:980px){
       .hero-grid{grid-template-columns:1fr}
@@ -434,6 +504,9 @@
 </head>
 
 <body>
+  <!-- Progress bar -->
+  <div class="readbar" aria-hidden="true"><i></i></div>
+
   <!-- TOPBAR -->
   <div class="topbar">
     <div class="wrap">
@@ -467,10 +540,10 @@
   <header>
     <div class="wrap">
       <div class="hero-grid">
-        <div>
+        <div class="reveal">
           <div class="pill">
             <span class="dot"></span>
-            Fundador da Quintino Coders com comunidade acima de 2.000 programadores
+            Fundador da Quintino Coders com comunidade acima de <b>+<span data-count="2000" data-dur="900">2000</span></b> programadores
           </div>
 
           <h1>Conquiste seu primeiro emprego como programador<br/>ou receba seu dinheiro de volta</h1>
@@ -499,7 +572,7 @@
           </p>
         </div>
 
-        <div class="hero-card">
+        <div class="hero-card reveal floaty tilt lift" data-delay="1">
           <div class="stamp">
             <div>
               <div class="big">0%</div>
@@ -539,26 +612,26 @@
   <!-- COMO FUNCIONA -->
   <section id="como-funciona">
     <div class="wrap">
-      <h2 class="section-title">Mentoria completa, prática e com suporte real</h2>
-      <p class="section-desc">
+      <h2 class="section-title reveal">Mentoria completa, prática e com suporte real</h2>
+      <p class="section-desc reveal" data-delay="1">
         Muita gente estuda e continua sem resposta porque não tem estratégia, posicionamento e rotina de candidaturas.
         O Booster existe para virar isso com um plano executável.
       </p>
 
       <div class="grid-4">
-        <div class="card">
+        <div class="card reveal lift" data-delay="1">
           <strong>Mentoria completa</strong>
           <p>Acompanhamento e plano individual com objetivo único: contratação.</p>
         </div>
-        <div class="card">
+        <div class="card reveal lift" data-delay="2">
           <strong>Prática e comunidade</strong>
           <p>Você executa, recebe feedback e tem suporte real para manter constância.</p>
         </div>
-        <div class="card">
+        <div class="card reveal lift" data-delay="3">
           <strong>Empregabilidade</strong>
           <p>Currículo, LinkedIn, candidaturas e entrevistas com método.</p>
         </div>
-        <div class="card">
+        <div class="card reveal lift" data-delay="4">
           <strong>Reconhecimento</strong>
           <p>Marcos e conquistas para manter motivação e consistência.</p>
         </div>
@@ -571,42 +644,42 @@
     <div class="wrap">
       <div class="grid-2">
         <div>
-          <h2 class="section-title">O processo até a contratação</h2>
-          <p class="section-desc">
+          <h2 class="section-title reveal">O processo até a contratação</h2>
+          <p class="section-desc reveal" data-delay="1">
             A maioria trava em 4 pontos: currículo fraco, LinkedIn mal posicionado, candidaturas sem rotina e entrevistas sem preparo.
             Aqui você vira contratável com um plano semanal simples.
           </p>
 
           <div class="timeline">
-            <div class="step">
+            <div class="step reveal lift" data-delay="1">
               <div class="num">1</div>
               <div>
                 <b>Posicionamento</b>
                 <span>currículo e LinkedIn alinhados com vagas reais, clareza e palavras chave</span>
               </div>
             </div>
-            <div class="step">
+            <div class="step reveal lift" data-delay="2">
               <div class="num">2</div>
               <div>
                 <b>Direção técnica</b>
                 <span>o que estudar e o que ignorar para seu nível, sem estudo aleatório</span>
               </div>
             </div>
-            <div class="step">
+            <div class="step reveal lift" data-delay="3">
               <div class="num">3</div>
               <div>
                 <b>Portfólio estratégico</b>
                 <span>projetos com objetivo, README forte e discurso pronto para entrevista</span>
               </div>
             </div>
-            <div class="step">
+            <div class="step reveal lift" data-delay="4">
               <div class="num">4</div>
               <div>
                 <b>Candidaturas com método</b>
                 <span>rotina, acompanhamento e ajustes do funil para gerar retorno</span>
               </div>
             </div>
-            <div class="step">
+            <div class="step reveal lift" data-delay="4">
               <div class="num">5</div>
               <div>
                 <b>Entrevistas</b>
@@ -616,7 +689,7 @@
           </div>
         </div>
 
-        <aside class="pricing" id="preco">
+        <aside class="pricing reveal lift tilt" id="preco" data-delay="2">
           <div class="pricing-head">
             <div class="pill"><span class="dot"></span> Entradas limitadas</div>
             <div style="height:10px"></div>
@@ -661,27 +734,27 @@
   <!-- PROVAS -->
   <section id="provas">
     <div class="wrap">
-      <h2 class="section-title">Provas e sinais de que funciona</h2>
-      <p class="section-desc">
+      <h2 class="section-title reveal">Provas e sinais de que funciona</h2>
+      <p class="section-desc reveal" data-delay="1">
         Aqui você coloca sua carreira em modo execução. Se quiser, substitua os depoimentos abaixo por prints e cases reais seus.
       </p>
 
       <div class="grid-3">
-        <div class="quote">
+        <div class="quote reveal lift" data-delay="1">
           <p>Eu parei de estudar no escuro. Em uma semana meu currículo ficou claro e comecei a receber resposta em vaga.</p>
           <div class="who">
             <div class="avatar">A</div>
             <div><b>Mentorado</b><span>primeiras entrevistas</span></div>
           </div>
         </div>
-        <div class="quote">
+        <div class="quote reveal lift" data-delay="2">
           <p>O plano semanal me salvou. Eu fazia tudo aleatório. Agora eu sei exatamente o que fazer todo dia.</p>
           <div class="who">
             <div class="avatar">B</div>
             <div><b>Mentorada</b><span>transição de carreira</span></div>
           </div>
         </div>
-        <div class="quote">
+        <div class="quote reveal lift" data-delay="3">
           <p>As simulações de entrevista foram o diferencial. Eu travava muito na hora de me apresentar.</p>
           <div class="who">
             <div class="avatar">C</div>
@@ -693,15 +766,15 @@
       <div class="divider"></div>
 
       <div class="grid-3">
-        <div class="card soft">
+        <div class="card soft reveal lift" data-delay="1">
           <strong>2.000+ na comunidade</strong>
           <p>Base com vagas, suporte e networking dentro da Quintino Coders.</p>
         </div>
-        <div class="card soft">
+        <div class="card soft reveal lift" data-delay="2">
           <strong>Foco total em contratação</strong>
           <p>Currículo, LinkedIn, candidaturas e entrevistas, sem enrolação.</p>
         </div>
-        <div class="card soft">
+        <div class="card soft reveal lift" data-delay="3">
           <strong>Rotina simples</strong>
           <p>O que destrava não é genialidade, é constância com método.</p>
         </div>
@@ -712,8 +785,8 @@
   <!-- GARANTIA -->
   <section id="garantia">
     <div class="wrap">
-      <h2 class="section-title">Garantia: ou você conquista seu emprego ou recebe seu dinheiro de volta</h2>
-      <p class="section-desc">
+      <h2 class="section-title reveal">Garantia: ou você conquista seu emprego ou recebe seu dinheiro de volta</h2>
+      <p class="section-desc reveal" data-delay="1">
         Se após <b>6 meses de acompanhamento ativo</b> seguindo plano e entregas combinadas,
         você não conquistar seu primeiro emprego, devolvemos o valor investido.
         <br/><br/>
@@ -723,15 +796,15 @@
       </p>
 
       <div class="grid-3">
-        <div class="card">
+        <div class="card reveal lift" data-delay="1">
           <strong>Compromisso do mentorado</strong>
           <p>seguir rotina e entregas combinadas com acompanhamento.</p>
         </div>
-        <div class="card">
+        <div class="card reveal lift" data-delay="2">
           <strong>Compromisso do Booster</strong>
           <p>plano, direção e feedbacks durante o período.</p>
         </div>
-        <div class="card">
+        <div class="card reveal lift" data-delay="3">
           <strong>Transparência</strong>
           <p>sem promessas mágicas, processo e execução.</p>
         </div>
@@ -742,13 +815,13 @@
   <!-- FAQ -->
   <section id="faq">
     <div class="wrap">
-      <h2 class="section-title">Dúvidas que mais travam gente boa</h2>
-      <p class="section-desc">
+      <h2 class="section-title reveal">Dúvidas que mais travam gente boa</h2>
+      <p class="section-desc reveal" data-delay="1">
         Se você está com essas dúvidas, você é exatamente o tipo de pessoa que mais evolui aqui.
       </p>
 
       <div class="faq">
-        <div class="acc open">
+        <div class="acc open reveal lift" data-delay="1">
           <button type="button">
             Eu sou iniciante. Serve para mim
             <span class="plus">+</span>
@@ -758,7 +831,7 @@
           </div>
         </div>
 
-        <div class="acc">
+        <div class="acc reveal lift" data-delay="2">
           <button type="button">
             Eu já estudei muito e não tenho retorno. O que muda aqui
             <span class="plus">+</span>
@@ -768,7 +841,7 @@
           </div>
         </div>
 
-        <div class="acc">
+        <div class="acc reveal lift" data-delay="3">
           <button type="button">
             Preciso ter portfólio pronto para entrar
             <span class="plus">+</span>
@@ -778,7 +851,7 @@
           </div>
         </div>
 
-        <div class="acc">
+        <div class="acc reveal lift" data-delay="4">
           <button type="button">
             Isso é curso gravado
             <span class="plus">+</span>
@@ -794,7 +867,7 @@
   <!-- FINAL CTA -->
   <section id="entrar">
     <div class="wrap">
-      <div class="final">
+      <div class="final reveal lift" data-delay="1">
         <h2 style="margin:0 0 10px;letter-spacing:-.3px">Pronto para parar de tentar sozinho</h2>
         <p class="muted" style="margin:0;line-height:1.75">
           Você pode continuar estudando sem direção, ou entrar em um programa feito para te levar até a contratação com método, acompanhamento e comunidade.
@@ -825,17 +898,10 @@
   </div>
 
   <script>
+    // ano automático
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    document.querySelectorAll(".acc button").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const acc = btn.closest(".acc");
-        const isOpen = acc.classList.contains("open");
-        document.querySelectorAll(".acc").forEach(a => a.classList.remove("open"));
-        if(!isOpen) acc.classList.add("open");
-      });
-    });
-
+    // scroll suave (âncoras)
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener("click", (e) => {
         const href = a.getAttribute("href");
@@ -847,6 +913,137 @@
         }
       });
     });
+
+    // accordion (mantém 1 aberto)
+    document.querySelectorAll(".acc button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const acc = btn.closest(".acc");
+        const isOpen = acc.classList.contains("open");
+        document.querySelectorAll(".acc").forEach(a => a.classList.remove("open"));
+        if(!isOpen) acc.classList.add("open");
+      });
+    });
+
+    /* ===== ANIMAÇÕES ===== */
+
+    // progress bar + topbar shadow
+    (() => {
+      const bar = document.querySelector(".readbar > i");
+      const onScroll = () => {
+        const doc = document.documentElement;
+        const scrollTop = doc.scrollTop || document.body.scrollTop;
+        const height = (doc.scrollHeight - doc.clientHeight) || 1;
+        const p = Math.min(100, Math.max(0, (scrollTop / height) * 100));
+        if(bar) bar.style.width = p + "%";
+
+        const topbar = document.querySelector(".topbar");
+        if(topbar){
+          if(scrollTop > 6) topbar.classList.add("scrolled");
+          else topbar.classList.remove("scrolled");
+        }
+      };
+      window.addEventListener("scroll", onScroll, { passive:true });
+      onScroll();
+    })();
+
+    // parallax leve no background
+    (() => {
+      let raf = 0;
+      const onMove = (e) => {
+        if(raf) return;
+        raf = requestAnimationFrame(() => {
+          const x = (e.clientX / window.innerWidth - 0.5);
+          const y = (e.clientY / window.innerHeight - 0.5);
+          document.body.style.setProperty("--px", (x * 18).toFixed(2) + "px");
+          document.body.style.setProperty("--py", (y * 12).toFixed(2) + "px");
+          raf = 0;
+        });
+      };
+      window.addEventListener("mousemove", onMove, { passive:true });
+    })();
+
+    // reveal on scroll
+    (() => {
+      const els = document.querySelectorAll(".reveal");
+      if(!("IntersectionObserver" in window) || !els.length){
+        els.forEach(el => el.classList.add("in"));
+        return;
+      }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(ent => {
+          if(ent.isIntersecting){
+            ent.target.classList.add("in");
+            io.unobserve(ent.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -10% 0px" });
+
+      els.forEach(el => io.observe(el));
+    })();
+
+    // counter numbers (use data-count)
+    (() => {
+      const counters = document.querySelectorAll("[data-count]");
+      if(!counters.length) return;
+
+      const animate = (el) => {
+        const target = parseInt(el.getAttribute("data-count"), 10) || 0;
+        const dur = parseInt(el.getAttribute("data-dur"), 10) || 900;
+        const start = performance.now();
+        const from = 0;
+
+        const tick = (t) => {
+          const p = Math.min(1, (t - start) / dur);
+          const eased = 1 - Math.pow(1 - p, 3);
+          const val = Math.floor(from + (target - from) * eased);
+          el.textContent = val.toLocaleString("pt-BR");
+          if(p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(ent => {
+          if(ent.isIntersecting){
+            animate(ent.target);
+            io.unobserve(ent.target);
+          }
+        });
+      }, { threshold:0.6 });
+
+      counters.forEach(c => io.observe(c));
+    })();
+
+    // tilt effect (desktop)
+    (() => {
+      const cards = document.querySelectorAll(".tilt");
+      if(!cards.length) return;
+
+      const isTouch = matchMedia("(hover: none)").matches;
+      if(isTouch) return;
+
+      cards.forEach(card => {
+        let rect;
+
+        const onEnter = () => { rect = card.getBoundingClientRect(); };
+        const onMove = (e) => {
+          if(!rect) rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width;
+          const y = (e.clientY - rect.top) / rect.height;
+          const rx = (0.5 - y) * 7;
+          const ry = (x - 0.5) * 10;
+          card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-2px)`;
+        };
+        const onLeave = () => {
+          card.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px)";
+          rect = null;
+        };
+
+        card.addEventListener("mouseenter", onEnter);
+        card.addEventListener("mousemove", onMove);
+        card.addEventListener("mouseleave", onLeave);
+      });
+    })();
   </script>
 </body>
 </html>
